@@ -1,0 +1,38 @@
+<!-- app/views/test_results/_index.html.erb -->
+<div class="mb-6">
+  <%= text_field_tag :search, params[:search], placeholder: "Search for a patient or test result...", class: "p-2 w-full rounded border shadow focus:outline-none focus:border-blue-500", oninput: "searchTestResult()" %>
+</div>
+<div class="test-results-content space-y-6">
+  <% @test_results.each do |test_result| %>
+    <div class="test-result-tab bg-white p-6 rounded-lg shadow-md mb-6">
+      <div class="test-result-header">
+        <h2 class="font-semibold text-lg"> <%= test_result.sample.patient.name %></h2>
+        <p class="text-gray-600">Test: <%= test_result.sample.test.name %></p>
+        <p class="text-gray-600">Status: <%= test_result.sample.status.capitalize %></p>
+      </div>
+      <div class="test-result-details mt-4">
+        <h3 class="font-semibold text-md">Result:</h3>
+        <p><%= test_result.result.html_safe %></p>
+      </div>
+      <div class="mt-4">
+        <%= turbo_frame_tag "review_result_#{test_result.id}" do %>
+          <%= link_to 'Review Results', review_result_test_result_path(test_result), data: { turbo_frame: "review_result_#{test_result.id}" }, class: "inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-800 focus:outline-none focus:border-blue-800 focus:ring focus:ring-blue-200 disabled:opacity-25 transition" %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script>
+  function searchTestResult() {
+    const searchValue = document.querySelector('[name="search"]').value.toLowerCase();
+    document.querySelectorAll('.test-result-tab').forEach(result => {
+      let resultHasMatch = false;
+      const patientName = result.querySelector('.test-result-header h2').textContent.toLowerCase();
+      const testName = result.querySelector('.test-result-header p').textContent.toLowerCase();
+      if (patientName.includes(searchValue) || testName.includes(searchValue)) {
+        resultHasMatch = true;
+      }
+      result.style.display = resultHasMatch ? 'block' : 'none';
+    });
+  }
+</script>

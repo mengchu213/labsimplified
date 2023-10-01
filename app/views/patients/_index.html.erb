@@ -1,0 +1,84 @@
+<!-- app/views/patients/_index.html.erb -->
+<div class="mb-6">
+  <%= text_field_tag :search, params[:search], placeholder: "Search for a patient, sample, or test...", class: "p-2 w-full rounded border shadow focus:outline-none focus:border-blue-500", oninput: "searchPatientSampleTest()" %>
+  <%= select_tag :status, options_for_select(['All', 'Pending', 'Processing', 'Completed'], selected: params[:status]), class: "p-2 rounded border shadow focus:outline-none focus:border-blue-500", onchange: "filterStatus()" %>
+</div>
+<div class="patients-content space-y-6">
+  <% patients.each do |patient| %>
+    <div class="patient-tab bg-white p-6 rounded-lg shadow-md transition duration-300 hover:shadow-lg">
+      <div class="patient-header cursor-pointer" onclick="toggleDetails(event, '<%= patient.id %>')">
+        <h2 class="font-semibold text-lg text-gray-700 hover:text-gray-900 transition duration-300">
+          <%= patient.name %> - <%= patient.patient_email %>
+          <%= turbo_frame_tag "edit_patient" do %>
+            <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500' %>
+          <% end %>
+        </h2>
+        <p class="text-gray-500">DOB: <%= patient.dob %></p>
+        <!-- Display DOB -->
+      </div>
+      <div id="details-<%= patient.id %>" class="patient-details hidden mt-4">
+        <ul class="list-disc pl-5 grid grid-cols-1 gap-4">
+          <% patient.samples.each do |sample| %>
+            <li class="mb-2 text-gray-600 hover:text-gray-800 transition duration-300">
+              Sample Type: <%= sample.sample_type %> - Status: <%= sample.status %>
+              <br>
+              Test: <%= sample.test.name %>
+              <%= turbo_frame_tag 'new_test_result' do %>
+                <%= link_to 'Add Test Result', new_test_result_path(sample_id: sample.id), class: 'text-blue-500' %> <!-- Link to add test result -->
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+</div>
+<script>
+  function toggleDetails(event, patientId) {
+    const detailsDiv = document.getElementById(`details-${patientId}`);
+    detailsDiv.classList.toggle('hidden');
+  }
+
+  function searchPatientSampleTest() {
+    const searchValue = document.querySelector('[name="search"]').value.toLowerCase();
+    document.querySelectorAll('.patient-tab').forEach(patient => {
+      let patientHasMatch = false;
+      patient.querySelector('.patient-details').classList.add('hidden');
+      patient.querySelectorAll('h2, li').forEach(item => {
+        const itemName = item.textContent.toLowerCase();
+        const regex = new RegExp(`(${searchValue})`, 'gi');
+        if (itemName.includes(searchValue)) {
+          patientHasMatch = true;
+          item.innerHTML = item.textContent.replace(regex, '<span class="highlight bg-yellow-300">$1</span>');
+        } else {
+          item.innerHTML = item.textContent;
+        }
+      });
+      if (patientHasMatch) {
+        patient.style.display = 'block';
+        patient.querySelector('.patient-details').classList.remove('hidden');
+      } else {
+        patient.style.display = 'none';
+      }
+    });
+  }
+
+  function filterStatus() {
+    const selectedStatus = document.querySelector('[name="status"]').value.toLowerCase();
+    document.querySelectorAll('.patient-tab').forEach(patient => {
+      let patientHasMatch = false;
+      patient.querySelector('.patient-details').classList.add('hidden');
+      patient.querySelectorAll('li').forEach(item => {
+        const itemStatus = item.textContent.toLowerCase();
+        if (selectedStatus === 'all' || itemStatus.includes(selectedStatus)) {
+          patientHasMatch = true;
+        }
+      });
+      if (patientHasMatch) {
+        patient.style.display = 'block';
+      } else {
+        patient.style.display = 'none';
+      }
+    });
+  }
+</script>

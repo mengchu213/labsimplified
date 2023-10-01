@@ -1,0 +1,20 @@
+<!-- app/views/pages/dashboard.html.erb -->
+<div class="container mx-auto p-6">
+  <ul class="flex border-b mb-4">
+    <%= render_tab 'Available Tests', dashboard_path(active_tab: 'lab_sections'), @active_tab %>
+    <%= render_tab 'Patients', dashboard_path(active_tab: 'patients'), @active_tab %>
+    <%= render_tab 'Test Results', dashboard_path(active_tab: 'test_results'), @active_tab %>
+    <%= turbo_frame_tag 'new_patient' do %>
+      <%= link_to 'Add Patient', new_patient_path %>
+    <% end %>
+  </ul>
+  <div class="tab-content mt-4">
+    <% if @active_tab == 'lab_sections' %>
+      <%= render partial: 'lab_sections/index' %>
+    <% elsif @active_tab == 'patients' %>
+      <%= render partial: 'patients/index', locals: { patients: @patients } %>
+    <% elsif @active_tab == 'test_results' %>
+      <%= render partial: 'test_results/index', locals: { test_results: @test_results } %>
+    <% end %>
+  </div>
+</div>
