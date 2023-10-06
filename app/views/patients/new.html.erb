@@ -37,7 +37,6 @@
                 <%= sample_form.label :test_id, "Test", class: "block text-sm font-medium text-gray-700" %>
                 <%= sample_form.collection_select :test_id, Test.all, :id, :name, { include_blank: 'Please select a test' }, class: "mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
                 <%= sample_form.hidden_field :_destroy, class: 'sample-destroy' %>
-                <%= link_to "Remove this test", '#', class: "remove-sample text-red-500" %>
               </div>
               <div class="mb-4">
                 <%= sample_form.label :sample_type, "Sample Type", class: "block text-sm font-medium text-gray-700" %>
@@ -48,7 +47,6 @@
                 <%= sample_form.select :status, ['pending', 'processing', 'completed'], { selected: 'pending' }, class: "mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
               </div>
             <% end %>
-            <%= link_to "Add another test", '#', id: "add-sample", class: "text-blue-500" %>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
               <%= form.submit "Add Patient", class: "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
               <%= link_to 'Cancel', :back, class: "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
@@ -59,24 +57,3 @@
     </div>
   </div>
 <% end %>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM loaded");
-      document.getElementById("add-sample").addEventListener("click", function(e) {
-          console.log("Add sample clicked");
-          e.preventDefault();
-          let sampleFields = document.querySelector(".sample-fields").cloneNode(true);
-          document.getElementById("add-sample").before(sampleFields);
-      });
-
-      document.body.addEventListener("click", function(e) {
-          if (e.target && e.target.classList.contains("remove-sample")) {
-              console.log("Remove sample clicked");
-              e.preventDefault();
-              let sampleFields = e.target.closest(".sample-fields");
-              sampleFields.querySelector(".sample-destroy").value = "1";
-              sampleFields.style.display = "none";
-          }
-      });
-  });
-</script>

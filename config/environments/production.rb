@@ -62,14 +62,14 @@ Rails.application.configure do
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "labsimplify_production"
 
-  config.action_mailer.default_url_options = { host: 'stockz-r93b.onrender.com' }
+  config.action_mailer.default_url_options = { host: 'https://labsimplified.onrender.com' }
 
   config.action_mailer.perform_caching = false
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address: 'smtp.sendgrid.net',
     port: 587,
-    domain: 'stockz-r93b.onrender.com',
+    domain: 'https://labsimplified.onrender.com',
 
     user_name: 'apikey',
     password: ENV['SENDGRID_API_KEY'],
