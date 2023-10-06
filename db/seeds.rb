@@ -8,7 +8,7 @@
 
 User.create!( 
   name: "joe",
-  email: 'admins@gmail.com',
+  email: 'admin@gmail.com',
   password: '123456', 
   password_confirmation: '123456',
   role: 1
@@ -134,11 +134,11 @@ laboratory_sections = {
 
 
 # Creating Patients
-patient1 = Patient.create!(name: "John Doe", dob: "1980-01-01", patient_email: "john.doe@example.com")
-patient2 = Patient.create!(name: "Jane Doe", dob: "1990-02-02", patient_email: "jane.doe@example.com")
-patient3 = Patient.create!(name: "Jim Beam", dob: "1985-03-03", patient_email: "jim.beam@example.com")
-patient4 = Patient.create!(name: "Jack Daniels", dob: "1975-04-04", patient_email: "jack.daniels@example.com")
-patient5 = Patient.create!(name: "Johnny Walker", dob: "2000-05-05", patient_email: "johnny.walker@example.com")
+# patient1 = Patient.create!(name: "John Doe", dob: "1980-01-01", patient_email: "john.doe@example.com")
+# patient2 = Patient.create!(name: "Jane Doe", dob: "1990-02-02", patient_email: "jane.doe@example.com")
+# patient3 = Patient.create!(name: "Jim Beam", dob: "1985-03-03", patient_email: "jim.beam@example.com")
+# patient4 = Patient.create!(name: "Jack Daniels", dob: "1975-04-04", patient_email: "jack.daniels@example.com")
+# patient5 = Patient.create!(name: "Johnny Walker", dob: "2000-05-05", patient_email: "johnny.walker@example.com")
 
 # Creating Samples (Assuming you have some Test instances created, replace Test.first.id with actual test_id you want to associate)
 sample1 = Sample.create!(sample_type: "Blood", status: "pending", test_id: Test.first.id, patient_id: patient1.id)
