@@ -1,7 +1,7 @@
 class LabSectionsController < ApplicationController
   before_action :set_lab_section, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :ensure_admin
+  
 
   # GET /lab_sections
   def index

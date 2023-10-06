@@ -1,17 +1,17 @@
 <!-- app/views/lab_sections/_index.html.erb -->
 <div class="mb-6">
-  <%= text_field_tag :search, params[:search], placeholder: "Search for a test...", class: "p-3 w-full rounded-md border-2 border-gray-300 focus:outline-none focus:border-blue-500 transition duration-300", oninput: "searchTest()" %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search for a test...", class: "p-3 w-full rounded-md border-2 border-gray-300 focus:border-indigo-500 transition duration-300 shadow-md", oninput: "searchTest()" %>
 </div>
 <div class="lab-sections-content space-y-6">
   <% @lab_sections.each do |lab_section| %>
-    <div class="lab-section-tab bg-white p-6 rounded-lg shadow-md transition duration-300 hover:shadow-lg">
+    <div class="lab-section-tab bg-white p-6 rounded-lg shadow-md transition duration-300 hover:shadow-lg border border-gray-200">
       <div class="lab-section-header cursor-pointer" onclick="toggleTests(event, '<%= lab_section.id %>')">
-        <h2 class="font-semibold text-lg text-gray-700 hover:text-gray-900 transition duration-300"><%= lab_section.name %></h2>
+        <h2 class="font-semibold text-xl text-gray-800 hover:text-indigo-600 transition duration-300"><%= lab_section.name %></h2>
       </div>
       <div id="tests-<%= lab_section.id %>" class="lab-section-tests hidden mt-4">
         <ul class="list-disc pl-5 grid grid-cols-2 gap-4">
           <% lab_section.tests.each do |test| %>
-            <li class="mb-2 text-gray-600 hover:text-gray-800 transition duration-300"><%= test.name %></li>
+            <li class="mb-2 text-gray-700 hover:text-indigo-600 transition duration-300"><%= test.name %></li>
           <% end %>
         </ul>
       </div>
@@ -26,25 +26,23 @@
   function searchTest() {
     const searchValue = document.querySelector('[name="search"]').value.toLowerCase();
     document.querySelectorAll('.lab-section-tab').forEach(section => {
-      let sectionHasMatch = false; // Track if the section has any match
-      section.querySelector('.lab-section-tests').classList.add('hidden'); // Initially hide all tests
+      let sectionHasMatch = false;
+      section.querySelector('.lab-section-tests').classList.add('hidden');
       section.querySelectorAll('li').forEach(test => {
         const testName = test.textContent.toLowerCase();
         const regex = new RegExp(`(${searchValue})`, 'gi');
         if (testName.includes(searchValue)) {
-          sectionHasMatch = true; // Set to true if a match is found in the section
-          // Highlight matched text
+          sectionHasMatch = true;
           test.innerHTML = test.textContent.replace(regex, '<span class="highlight bg-yellow-300">$1</span>');
         } else {
-          // Remove previous highlights if no match
           test.innerHTML = test.textContent;
         }
       });
       if (sectionHasMatch) {
-        section.style.display = 'block'; // Show the section if it has any match
-        section.querySelector('.lab-section-tests').classList.remove('hidden'); // Show the tests of the matched section
+        section.style.display = 'block';
+        section.querySelector('.lab-section-tests').classList.remove('hidden');
       } else {
-        section.style.display = 'none'; // Hide the section if it has no match
+        section.style.display = 'none';
       }
     });
   }

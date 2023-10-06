@@ -1,7 +1,7 @@
 class TestsController < ApplicationController
   before_action :set_test, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :ensure_admin
+ 
 
   # GET /tests
   def index

@@ -7,7 +7,7 @@
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
       <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-          <%= form_with(model: @test_result, url: test_results_path, local: true) do |form| %>
+          <%= form_with(model: @test_result, url: test_results_path, data: { turbo: false }) do |form| %>
             <% if @test_result.errors.any? %>
               <div id="error_explanation" class="bg-red-100 p-3 rounded text-red-500 mb-4">
                 <h2 class="font-semibold text-lg">
@@ -26,15 +26,15 @@
               <%= form.label :result, class: "block text-sm font-medium text-gray-700" %>
               <%= form.text_area :result, class: "tinymce mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500", value: <<-HTML
 
-                <p>Test Result: </p>
+                
 
               HTML
               %>
             </div>
             <%= form.hidden_field :sample_id, value: params[:sample_id] %>
             <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <%= form.submit "Add Test Result", class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" %>
-              <%= link_to 'Cancel', :back, class: "w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm" %>
+              <%= form.submit "Add Test Result", class: "w-full text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
+              <%= link_to 'Cancel', :back, class: "w-full text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
             </div>
           <% end %>
         </div>

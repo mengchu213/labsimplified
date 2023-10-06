@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user!, only: [:dashboard]
+  before_action :redirect_if_logged_in, only: [:home]
   def home
   end
   def dashboard
@@ -9,7 +10,17 @@ class PagesController < ApplicationController
     @samples = Sample.all if @active_tab == 'samples'
     @test_results = TestResult.all if @active_tab == 'test_results'
     @active_test = params[:active_test]
+    if @active_tab == 'users'
+      @users = User.all
+    end
+    @users = User.all if current_user.role == "admin"
   end
-  
+  private
+
+  def redirect_if_logged_in
+    if user_signed_in?
+      redirect_to dashboard_path # or wherever you want to redirect logged-in users
+    end
+  end
   
 end

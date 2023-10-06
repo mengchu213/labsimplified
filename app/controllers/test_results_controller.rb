@@ -1,7 +1,7 @@
 class TestResultsController < ApplicationController
   before_action :set_test_result, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :ensure_admin
+ 
 
   # GET /test_results
   def index
@@ -30,7 +30,7 @@ class TestResultsController < ApplicationController
     @test_result = TestResult.new(test_result_params)
 
     if @test_result.save
-      redirect_to @test_result, notice: "Test result was successfully created."
+      redirect_to request.referer, notice: "Test result was successfully created."
     else
       render :new
     end
@@ -57,6 +57,16 @@ class TestResultsController < ApplicationController
     @test_result = TestResult.find(params[:id])
     render partial: 'review_result', locals: { test_result: @test_result }
   end
+  
+  def send_results
+    @test_result = TestResult.find(params[:id])
+    TestResultMailer.send_results(@test_result).deliver_now
+    redirect_to request.referrer, notice: 'Results were successfully sent.'
+  end
+  
+  
+  
+  
   
   
   

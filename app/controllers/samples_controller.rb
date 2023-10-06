@@ -1,7 +1,7 @@
 class SamplesController < ApplicationController
   before_action :set_sample, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :ensure_admin
+
 
   # GET /samples
   def index

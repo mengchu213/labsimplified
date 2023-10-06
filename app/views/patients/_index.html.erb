@@ -1,31 +1,38 @@
 <!-- app/views/patients/_index.html.erb -->
 <div class="mb-6">
-  <%= text_field_tag :search, params[:search], placeholder: "Search for a patient, sample, or test...", class: "p-2 w-full rounded border shadow focus:outline-none focus:border-blue-500", oninput: "searchPatientSampleTest()" %>
-  <%= select_tag :status, options_for_select(['All', 'Pending', 'Processing', 'Completed'], selected: params[:status]), class: "p-2 rounded border shadow focus:outline-none focus:border-blue-500", onchange: "filterStatus()" %>
+  <div class="flex space-x-4">
+    <%= text_field_tag :search, params[:search], placeholder: "Search for a patient, sample, or test...", class: "flex-grow p-3 w-full rounded-md border-2 border-gray-300 focus:border-indigo-500 transition duration-300 shadow-md", oninput: "searchPatientSampleTest()" %>
+    <%= select_tag :status, options_for_select(['All', 'Pending', 'Processing', 'Completed'], selected: params[:status]), class: "p-3 rounded-md border-2 border-gray-300 focus:border-indigo-500 transition duration-300 shadow-md", onchange: "filterStatus()" %>
+  </div>
 </div>
 <div class="patients-content space-y-6">
   <% patients.each do |patient| %>
-    <div class="patient-tab bg-white p-6 rounded-lg shadow-md transition duration-300 hover:shadow-lg">
+    <div class="patient-tab bg-white p-6 rounded-lg shadow-md transition duration-300 hover:shadow-lg border border-gray-200">
       <div class="patient-header cursor-pointer" onclick="toggleDetails(event, '<%= patient.id %>')">
-        <h2 class="font-semibold text-lg text-gray-700 hover:text-gray-900 transition duration-300">
-          <%= patient.name %> - <%= patient.patient_email %>
-          <%= turbo_frame_tag "edit_patient" do %>
-            <%= link_to 'Edit', edit_patient_path(patient), class: 'text-blue-500' %>
-          <% end %>
-        </h2>
-        <p class="text-gray-500">DOB: <%= patient.dob %></p>
-        <!-- Display DOB -->
+        <div class="flex justify-between items-center">
+          <h2 class="font-semibold text-xl text-gray-800 hover:text-indigo-600 transition duration-300">
+            <%= patient.name %> - <%= patient.patient_email %>
+          </h2>
+          <div class="flex space-x-4">
+            <%= turbo_frame_tag "edit_patient" do %>
+              <%= link_to 'Edit', edit_patient_path(patient), class: 'text-white bg-gradient-to-r from-indigo-500 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 cursor-pointer' %>
+            <% end %>
+          </div>
+        </div>
+        <p class="mt-2 text-gray-500">DOB: <%= patient.dob %></p>
       </div>
       <div id="details-<%= patient.id %>" class="patient-details hidden mt-4">
         <ul class="list-disc pl-5 grid grid-cols-1 gap-4">
           <% patient.samples.each do |sample| %>
-            <li class="mb-2 text-gray-600 hover:text-gray-800 transition duration-300">
+            <li class="mb-2 text-gray-700 hover:text-indigo-600 transition duration-300">
               Sample Type: <%= sample.sample_type %> - Status: <%= sample.status %>
               <br>
               Test: <%= sample.test.name %>
-              <%= turbo_frame_tag 'new_test_result' do %>
-                <%= link_to 'Add Test Result', new_test_result_path(sample_id: sample.id), class: 'text-blue-500' %> <!-- Link to add test result -->
-              <% end %>
+              <div class="mt-2 flex justify-end space-x-4">
+                <%= turbo_frame_tag 'new_test_result' do %>
+                  <%= link_to 'Add Test Result', new_test_result_path(sample_id: sample.id), class: 'text-white bg-gradient-to-r from-indigo-500 to-indigo-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 shadow-lg font-medium rounded-lg text-sm px-5 py-2.5 cursor-pointer' %>
+                <% end %>
+              </div>
             </li>
           <% end %>
         </ul>

@@ -1,11 +1,12 @@
 class PatientsController < ApplicationController
   before_action :set_patient, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
-  before_action :ensure_admin
+ 
 
   # GET /patients
   def index
     @patients = Patient.all
+    
   end
 
   # GET /patients/1
@@ -45,12 +46,15 @@ class PatientsController < ApplicationController
   # PATCH/PUT /patients/1
   def update
     @patient = Patient.find(params[:id])
+    
     if @patient.update(patient_params)
-      redirect_to patients_path, notice: 'Patient was successfully updated.'
+      redirect_to request.referer, notice: 'Patient was successfully updated.'
     else
       render :edit
     end
   end
+  
+  
 
   # DELETE /patients/1
   def destroy

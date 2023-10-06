@@ -1,19 +1,33 @@
 <%= turbo_frame_tag "edit_patient" do %>
-  <%= form_with(model: @patient, local: true) do |form| %>
-    <div class="field">
-      <%= form.label :name %>
-      <%= form.text_field :name %>
+  <div class="fixed z-100 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true"></div>
+      <!-- Modal Content -->
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <%= turbo_frame_tag "edit_patient" do %>
+            <%= form_with(model: @patient, data: { turbo: false }) do |form| %>
+              <div class="mb-4">
+                <%= form.label :name, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :name, class: "mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+              </div>
+              <div class="mb-4">
+                <%= form.label :patient_email, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.text_field :patient_email, class: "mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+              </div>
+              <div class="mb-4">
+                <%= form.label :dob, class: "block text-sm font-medium text-gray-700" %>
+                <%= form.date_field :dob, class: "mt-1 p-2 w-full rounded border shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500" %>
+              </div>
+              <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                <%= form.submit 'Update', class: "text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
+                <%= link_to 'Cancel', :back, class: "text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg shadow-red-500/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 cursor-pointer" %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
-    <div class="field">
-      <%= form.label :patient_email %>
-      <%= form.text_field :patient_email %>
-    </div>
-    <div class="field">
-      <%= form.label :dob %>
-      <%= form.date_field :dob %>
-    </div>
-    <div class="actions">
-      <%= form.submit 'Update' %>
-    </div>
-  <% end %>
+  </div>
 <% end %>

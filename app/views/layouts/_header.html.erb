@@ -1,15 +1,24 @@
-<header class="bg-blue-500 p-4 text-white">
-  <nav>
-    <ul class="flex space-x-4">
-      <li><%= link_to 'Home', root_path, class: "hover:text-gray-300" %></li>
-      <% if user_signed_in? %>
-        <li class="flex items-center space-x-2">
-          <span>Welcome, <%= current_user.name %> (<%= current_user.role %>)</span>
-          <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" %>
+<header class="bg-gradient-to-r from-indigo-500 to-indigo-600 p-4 text-white shadow-md">
+  <div class="container mx-auto">
+    <nav>
+      <ul class="flex justify-between items-center">
+        <li class="flex space-x-4">
+          <% if user_signed_in? %>
+            <%= link_to 'Home', root_path, class: "text-xl font-semibold hover:text-indigo-300 transition duration-150" %>
+          <% end %>
         </li>
-      <% else %>
-        <li><%= link_to 'Login', new_user_session_path, class: "hover:text-gray-300" %></li>
-      <% end %>
-    </ul>
-  </nav>
+        <% if user_signed_in? %>
+          <li class="flex items-center space-x-4">
+            <span class="text-xl font-semibold">Welcome, <%= current_user.name %></span>
+            <span class="text-sm text-indigo-300">(<%= current_user.role %>)</span>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: "text-white bg-gradient-to-r from-red-500 via-red-600 to-red-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 shadow-lg font-medium rounded-lg text-sm px-6 py-2.5 cursor-pointer transition duration-300" %>
+          </li>
+        <% else %>
+          <li>
+            <%= link_to 'Login', new_user_session_path, data: { turbo_frame: "login_sign" }, class: "text-indigo-900 bg-gradient-to-r from-indigo-200 via-indigo-300 to-indigo-400 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-indigo-300 shadow-lg font-medium rounded-lg text-sm px-6 py-2.5 cursor-pointer transition duration-300" %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
 </header>
