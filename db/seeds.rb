@@ -141,15 +141,15 @@ User.create!(
 # patient5 = Patient.create!(name: "Johnny Walker", dob: "2000-05-05", patient_email: "johnny.walker@example.com")
 
 # Creating Samples (Assuming you have some Test instances created, replace Test.first.id with actual test_id you want to associate)
-sample1 = Sample.create!(sample_type: "Blood", status: "pending", patient_id: patient1.id)
-sample2 = Sample.create!(sample_type: "Urine", status: "processing", patient_id: patient2.id)
-sample3 = Sample.create!(sample_type: "Saliva", status: "completed", patient_id: patient3.id)
-sample4 = Sample.create!(sample_type: "Blood", status: "pending", patient_id: patient4.id)
-sample5 = Sample.create!(sample_type: "Urine", status: "completed", patient_id: patient5.id)
+# sample1 = Sample.create!(sample_type: "Blood", status: "pending", patient_id: patient1.id)
+# sample2 = Sample.create!(sample_type: "Urine", status: "processing", patient_id: patient2.id)
+# sample3 = Sample.create!(sample_type: "Saliva", status: "completed", patient_id: patient3.id)
+# sample4 = Sample.create!(sample_type: "Blood", status: "pending", patient_id: patient4.id)
+# sample5 = Sample.create!(sample_type: "Urine", status: "completed", patient_id: patient5.id)
 
-# Creating Test Results
-TestResult.create!(result: "Positive", sample_id: sample1.id)
-TestResult.create!(result: "Negative", sample_id: sample2.id)
-TestResult.create!(result: "Positive", sample_id: sample3.id)
-TestResult.create!(result: "Negative", sample_id: sample4.id)
-TestResult.create!(result: "Positive", sample_id: sample5.id)
+# # Creating Test Results
+# TestResult.create!(result: "Positive", sample_id: sample1.id)
+# TestResult.create!(result: "Negative", sample_id: sample2.id)
+# TestResult.create!(result: "Positive", sample_id: sample3.id)
+# TestResult.create!(result: "Negative", sample_id: sample4.id)
+# TestResult.create!(result: "Positive", sample_id: sample5.id)
