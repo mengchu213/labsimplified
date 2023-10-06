@@ -102,26 +102,26 @@ User.create!(
 #   )
 # end
 
-# laboratory_sections = {
-#   'CLINICAL CHEMISTRY' => [
-#     'FBS', 'RBS', 'OGCT', 'OGTT', '2HPPBS', 'ALP', 'AST/SGOT', 'ALT/SGPT', 'LDH', 'TPAG',
-#     'BLOOD URIC ACID', 'BUN', 'CREATININE', 'LIPID PROFILE', 'CHOLESTEROL', 'TRIGLYCERIDES', 'HDL', 'LDL/VLDL'
-#   ],
-#   'HEMATOLOGY' => [
-#     'COMPLETE BLOOD COUNT', 'PLATELET COUNT', 'RETICULOCYTE COUNT', 'ESR', 'PERIPHERAL BLOOD SMEAR',
-#     'CLOTTING AND BLEEDING TIME', 'PT', 'PTT'
-#   ],
-#   'MICROBIOLOGY' => [
-#     'AFB STAIN', 'GRAM STAIN', 'KOH', 'BLOOD C/S'
-#   ],
-#   'CLINICAL MICROSCOPY' => [
-#     'URINALYSIS', 'PREGNANCY TEST', 'FECALYSIS', 'OCCULT BLOOD'
-#   ],
-#   'SEROLOGY/IMMUNOLOGY' => [
-#     'ABO/Rh TYPING', 'CROSS MATCHING', 'DIRECT COOMB’S TEST', 'HBsAG (QUALI/QUANTI)', 'ANTI HBS',
-#     'ANTI-HAV (IgG, IgM)', 'PRP (QUALI/QUANTI)'
-#   ]
-# }
+laboratory_sections = {
+  'CLINICAL CHEMISTRY' => [
+    'FBS', 'RBS', 'OGCT', 'OGTT', '2HPPBS', 'ALP', 'AST/SGOT', 'ALT/SGPT', 'LDH', 'TPAG',
+    'BLOOD URIC ACID', 'BUN', 'CREATININE', 'LIPID PROFILE', 'CHOLESTEROL', 'TRIGLYCERIDES', 'HDL', 'LDL/VLDL'
+  ],
+  'HEMATOLOGY' => [
+    'COMPLETE BLOOD COUNT', 'PLATELET COUNT', 'RETICULOCYTE COUNT', 'ESR', 'PERIPHERAL BLOOD SMEAR',
+    'CLOTTING AND BLEEDING TIME', 'PT', 'PTT'
+  ],
+  'MICROBIOLOGY' => [
+    'AFB STAIN', 'GRAM STAIN', 'KOH', 'BLOOD C/S'
+  ],
+  'CLINICAL MICROSCOPY' => [
+    'URINALYSIS', 'PREGNANCY TEST', 'FECALYSIS', 'OCCULT BLOOD'
+  ],
+  'SEROLOGY/IMMUNOLOGY' => [
+    'ABO/Rh TYPING', 'CROSS MATCHING', 'DIRECT COOMB’S TEST', 'HBsAG (QUALI/QUANTI)', 'ANTI HBS',
+    'ANTI-HAV (IgG, IgM)', 'PRP (QUALI/QUANTI)'
+  ]
+}
 
 # # Create Laboratory Sections and Tests
 # laboratory_sections.each do |section_name, tests|
@@ -134,3 +134,22 @@ User.create!(
 
 
 # Creating Patients
+patient1 = Patient.create!(name: "John Doe", dob: "1980-01-01", patient_email: "john.doe@example.com")
+patient2 = Patient.create!(name: "Jane Doe", dob: "1990-02-02", patient_email: "jane.doe@example.com")
+patient3 = Patient.create!(name: "Jim Beam", dob: "1985-03-03", patient_email: "jim.beam@example.com")
+patient4 = Patient.create!(name: "Jack Daniels", dob: "1975-04-04", patient_email: "jack.daniels@example.com")
+patient5 = Patient.create!(name: "Johnny Walker", dob: "2000-05-05", patient_email: "johnny.walker@example.com")
+
+# Creating Samples (Assuming you have some Test instances created, replace Test.first.id with actual test_id you want to associate)
+sample1 = Sample.create!(sample_type: "Blood", status: "pending", test_id: Test.first.id, patient_id: patient1.id)
+sample2 = Sample.create!(sample_type: "Urine", status: "processing", test_id: Test.first.id, patient_id: patient2.id)
+sample3 = Sample.create!(sample_type: "Saliva", status: "completed", test_id: Test.first.id, patient_id: patient3.id)
+sample4 = Sample.create!(sample_type: "Blood", status: "pending", test_id: Test.first.id, patient_id: patient4.id)
+sample5 = Sample.create!(sample_type: "Urine", status: "completed", test_id: Test.first.id, patient_id: patient5.id)
+
+# Creating Test Results
+TestResult.create!(result: "Positive", sample_id: sample1.id)
+TestResult.create!(result: "Negative", sample_id: sample2.id)
+TestResult.create!(result: "Positive", sample_id: sample3.id)
+TestResult.create!(result: "Negative", sample_id: sample4.id)
+TestResult.create!(result: "Positive", sample_id: sample5.id)
