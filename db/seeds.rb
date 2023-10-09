@@ -123,14 +123,14 @@ laboratory_sections = {
   ]
 }
 
-# # Create Laboratory Sections and Tests
-# laboratory_sections.each do |section_name, tests|
-#   lab_section = LabSection.find_or_create_by!(name: section_name)
+# Create Laboratory Sections and Tests
+laboratory_sections.each do |section_name, tests|
+  lab_section = LabSection.find_or_create_by!(name: section_name)
   
-#   tests.each do |test_name|
-#     Test.find_or_create_by!(name: test_name, lab_section: lab_section)
-#   end
-# end
+  tests.each do |test_name|
+    Test.find_or_create_by!(name: test_name, lab_section: lab_section)
+  end
+end
 
 
 # Creating Patients
