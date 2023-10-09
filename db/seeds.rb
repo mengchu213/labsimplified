@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create!( 
-  name: "joe",
-  email: 'adminds@gmail.com',
-  password: '123456', 
-  password_confirmation: '123456',
-  role: 1
-)
+# User.create!( 
+#   name: "joe",
+#   email: 'adminds@gmail.com',
+#   password: '123456', 
+#   password_confirmation: '123456',
+#   role: 1
+# )
 
 # # # Lab Sections
 # # 10.times do |i|
@@ -102,26 +102,26 @@ User.create!(
 #   )
 # end
 
-# laboratory_sections = {
-#   'CLINICAL CHEMISTRY' => [
-#     'FBS', 'RBS', 'OGCT', 'OGTT', '2HPPBS', 'ALP', 'AST/SGOT', 'ALT/SGPT', 'LDH', 'TPAG',
-#     'BLOOD URIC ACID', 'BUN', 'CREATININE', 'LIPID PROFILE', 'CHOLESTEROL', 'TRIGLYCERIDES', 'HDL', 'LDL/VLDL'
-#   ],
-#   'HEMATOLOGY' => [
-#     'COMPLETE BLOOD COUNT', 'PLATELET COUNT', 'RETICULOCYTE COUNT', 'ESR', 'PERIPHERAL BLOOD SMEAR',
-#     'CLOTTING AND BLEEDING TIME', 'PT', 'PTT'
-#   ],
-#   'MICROBIOLOGY' => [
-#     'AFB STAIN', 'GRAM STAIN', 'KOH', 'BLOOD C/S'
-#   ],
-#   'CLINICAL MICROSCOPY' => [
-#     'URINALYSIS', 'PREGNANCY TEST', 'FECALYSIS', 'OCCULT BLOOD'
-#   ],
-#   'SEROLOGY/IMMUNOLOGY' => [
-#     'ABO/Rh TYPING', 'CROSS MATCHING', 'DIRECT COOMB’S TEST', 'HBsAG (QUALI/QUANTI)', 'ANTI HBS',
-#     'ANTI-HAV (IgG, IgM)', 'PRP (QUALI/QUANTI)'
-#   ]
-# }
+laboratory_sections = {
+  'CLINICAL CHEMISTRY' => [
+    'FBS', 'RBS', 'OGCT', 'OGTT', '2HPPBS', 'ALP', 'AST/SGOT', 'ALT/SGPT', 'LDH', 'TPAG',
+    'BLOOD URIC ACID', 'BUN', 'CREATININE', 'LIPID PROFILE', 'CHOLESTEROL', 'TRIGLYCERIDES', 'HDL', 'LDL/VLDL'
+  ],
+  'HEMATOLOGY' => [
+    'COMPLETE BLOOD COUNT', 'PLATELET COUNT', 'RETICULOCYTE COUNT', 'ESR', 'PERIPHERAL BLOOD SMEAR',
+    'CLOTTING AND BLEEDING TIME', 'PT', 'PTT'
+  ],
+  'MICROBIOLOGY' => [
+    'AFB STAIN', 'GRAM STAIN', 'KOH', 'BLOOD C/S'
+  ],
+  'CLINICAL MICROSCOPY' => [
+    'URINALYSIS', 'PREGNANCY TEST', 'FECALYSIS', 'OCCULT BLOOD'
+  ],
+  'SEROLOGY/IMMUNOLOGY' => [
+    'ABO/Rh TYPING', 'CROSS MATCHING', 'DIRECT COOMB’S TEST', 'HBsAG (QUALI/QUANTI)', 'ANTI HBS',
+    'ANTI-HAV (IgG, IgM)', 'PRP (QUALI/QUANTI)'
+  ]
+}
 
 # # Create Laboratory Sections and Tests
 # laboratory_sections.each do |section_name, tests|
