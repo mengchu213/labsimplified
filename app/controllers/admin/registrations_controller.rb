@@ -1,9 +1,8 @@
-# app/controllers/admin/registrations_controller.rb
-
 class Admin::RegistrationsController < Devise::RegistrationsController
   before_action :set_user, only: [:edit, :update, :destroy]
   skip_before_action :require_no_authentication, only: [:new, :create]
   before_action :redirect_if_not_admin, only: [:new, :create]
+
   def create
     build_resource(sign_up_params)
 
@@ -22,11 +21,11 @@ class Admin::RegistrationsController < Devise::RegistrationsController
       respond_with resource
     end
   end
+
   def edit
-  
+    # Your edit logic here (if any)
   end
 
-  # PUT /resource
   def update
     if @user.update(user_params)
       redirect_to dashboard_path, notice: 'User was successfully updated.'
@@ -34,20 +33,14 @@ class Admin::RegistrationsController < Devise::RegistrationsController
       render :edit
     end
   end
-  
 
-  # DELETE /resource
   def destroy
-    @user = User.find(params[:id])
     @user.destroy
     redirect_to dashboard_path, notice: 'User was successfully deleted.'
   end
-  
-
-
-
 
   private
+
   def set_user
     @user = User.find(params[:id])
   end
@@ -55,6 +48,7 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :name, :role)
   end
+
   def redirect_if_not_admin
     unless current_user&.admin?
       redirect_to dashboard_path, alert: "Only admins can add new users."

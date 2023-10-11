@@ -1,8 +1,8 @@
 FactoryBot.define do
   factory :sample do
-    sample_type { "MyString" }
-    status { "MyString" }
-    test { nil }
-    patient { nil }
+    sample_type { Faker::Lorem.word }
+    status { ['pending', 'processing', 'completed'].sample }
+    test
+    patient
   end
 end

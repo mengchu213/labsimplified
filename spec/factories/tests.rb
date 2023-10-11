@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :test do
-    name { "MyString" }
-    lab_section { nil }
+    name { Faker::Lorem.word }
+    lab_section
   end
 end

@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :test_result do
-    result { "MyText" }
-    sample { nil }
+    result { Faker::Lorem.sentence }
+    sample
   end
 end
