@@ -2,7 +2,7 @@
   <div class="container mx-auto bg-white p-6 rounded-lg shadow-xl">
     <!-- Tabs -->
     <ul class="flex border-b mb-4 space-x-4 overflow-x-auto">
-      <%= render_tab 'Available Tests', dashboard_path(active_tab: 'lab_sections'), @active_tab, class: "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-t-lg transition duration-300" %>
+      <%= render_tab 'Laboratory Tests', dashboard_path(active_tab: 'lab_sections'), @active_tab, class: "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-t-lg transition duration-300" %>
       <%= render_tab 'Patients', dashboard_path(active_tab: 'patients'), @active_tab, class: "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-t-lg transition duration-300" %>
       <%= render_tab 'Test Results', dashboard_path(active_tab: 'test_results'), @active_tab, class: "text-gray-700 hover:text-blue-600 px-4 py-2 rounded-t-lg transition duration-300" %>
       <% if current_user.role == "admin" %>
