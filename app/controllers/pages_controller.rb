@@ -19,7 +19,7 @@ class PagesController < ApplicationController
 
   def redirect_if_logged_in
     if user_signed_in?
-      redirect_to dashboard_path # or wherever you want to redirect logged-in users
+      redirect_to dashboard_path 
     end
   end
   

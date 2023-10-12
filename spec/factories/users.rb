@@ -4,10 +4,10 @@ FactoryBot.define do
     password { 'password123' }
     password_confirmation { 'password123' }
     name { Faker::Name.name }
-    role { "medtech" } # Assuming 0 is the default role for 'user'. Adjust as needed.
+    role { "medtech" } 
 
     trait :admin do
-      role { "admin" } # Assuming 1 is the role for 'admin'. Adjust as needed.
+      role { "admin" } 
     end
   end
 end

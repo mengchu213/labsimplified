@@ -1,7 +1,7 @@
 class Admin::RegistrationsController < Devise::RegistrationsController
   before_action :set_user, only: [:edit, :update, :destroy]
   skip_before_action :require_no_authentication, only: [:new, :create]
-  before_action :redirect_if_not_admin, only: [:new, :create]
+  before_action :redirect_if_not_admin, only: [:new, :create, :edit]
 
   def create
     build_resource(sign_up_params)
@@ -23,7 +23,6 @@ class Admin::RegistrationsController < Devise::RegistrationsController
   end
 
   def edit
-    # Your edit logic here (if any)
   end
 
   def update
